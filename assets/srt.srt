@@ -1,0 +1,88 @@
+1
+00:00:00,000 --> 00:00:02,000
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} 字幕编辑器 xxero
+
+2
+00:00:03,560 --> 00:00:05,560
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} 字幕编辑 xxero
+
+3
+00:00:31,043 --> 00:00:33,043
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} ~~~~~~~~~~~~~~~~~~~
+
+4
+00:01:30,114 --> 00:01:31,935
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Remember that night
+
+5
+00:01:32,927 --> 00:01:34,340
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} I had to leave you
+
+6
+00:01:35,165 --> 00:01:37,165
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} You said it's alright
+
+7
+00:01:38,006 --> 00:01:40,006
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} And I believed you
+
+8
+00:01:40,211 --> 00:01:42,211
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} You know I'm no good
+
+9
+00:01:42,712 --> 00:01:44,712
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} No good at goodbyes
+
+10
+00:01:44,845 --> 00:01:46,845
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} No good without you
+
+11
+00:01:47,701 --> 00:01:49,701
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Better by your side
+
+12
+00:01:52,747 --> 00:01:54,747
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Wish I could be there with you
+
+13
+00:01:57,354 -->   00:02:00,878
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} I'm feeling lost without you
+
+14
+00:02:01,378 --> 00:02:03,378
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} In this empty bed
+
+15
+00:02:04,626 --> 00:02:06,626
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Where I'm all alone
+
+16
+00:02:07,005 --> 00:02:09,005
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} I've been such a mess
+
+17
+00:02:09,299 --> 00:02:11,299
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Need a one way ticket
+
+18
+00:02:11,247 --> 00:02:13,247
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Anywhere you are
+
+19
+00:02:13,538 --> 00:02:15,538
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} Is where I want to go
+
+20
+00:02:16,494 --> 00:02:18,494
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} You are my address
+
+21
+00:02:19,448 --> 00:02:21,448
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} I don't care how I get it
+
+22
+00:02:21,052 --> 00:02:23,052
+{\fs16\4a&H56&\an2\1c&HFFFFFF&\4c&HFFFFFF&} I need a one way ticket~home
+

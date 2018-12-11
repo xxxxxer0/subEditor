@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <base target="_blank" />
+    <script src="//cdn.bootcss.com/jquery/1.12.3/jquery.js"></script>
+    <title>字幕编辑器</title>
+</head>
+
+<body>
+
+    <div class="page" id="app" v-cloak>
+        <div class="page-header">
+            <div class="header-inner">
+                字幕编辑器
+            </div>
+        </div>
+        <div class="o-wrap">
+            <div class="box-editor">
+                <div class="video-editor"  :class="{'toggle' : isToggle}">
+                    <div class="player-wrap">
+                        <div class="loading-wrap" v-if="isloading"></div>
+                        <video 
+                            ref="video" 
+                            @timeupdate="timeupdate" 
+                            @ended="playing = false"
+                            @waiting="isloading = true"
+                            >
+                            <source type="video/mp4" src="./onewayticket.mp4" />
+                            <track src="./srt.srt" />
+                        </video>
+                        
+                        <input 
+                            ref="subInput"
+                            type="text" 
+                            v-model="subValue"
+                            @focus="inputSub" 
+                            @blur="play"
+                            @keyup.enter="addSub">
+                    </div>
+                    <div class="player-controls" :class="{'toggle' : isToggle}">
+                        <div class="timeline-wrap" v-if="!isToggle">
+                            <div class="cur-time">{{currentTime | formatTime}}</div>
+                            <div class="end-time">{{duration | formatTime}}</div>
+                        </div>
+                            <div class="divide-outer">
+                                
+                                <vue-scroll ref="scrollBar">
+                                    <div class="divide-inner" :style="{width: innerWidth}">
+                                        <div class="divide-wrap">
+                                            <i v-for="(item,index) in divides"><span>{{item | formatTime}}</span></i>
+                                        </div>
+                                        <div class="progress-bar" @mousedown.stop="mousedown">
+                                            <el-slider v-model="currentTime" :max="duration" @change="videoSlide" :format-tooltip="formatTime">
+                                            </el-slider>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </vue-scroll>
+                        
+                        
+                            </div>
+                            <div class="scroll-btn-wrap">
+                                <i class="prev" @click.stop="srollRight"></i>
+                                <i class="next" @click.stop="srollLeft"></i>
+                            </div>
+                        <div class="btn-wrap">
+                                <a  href="javascript:" 
+                                    class="btn-toggle-out" 
+                                    @mousedown.stop="isToggle = true" 
+                                    v-show="!isToggle">
+                                </a>
+                            <div class="toggle-time-wrap" v-if="isToggle">
+                                <span class="cur-time">{{currentTime | formatTime}}</span><em>/</em><span class="end-time">{{duration | formatTime}}</span>
+                            </div>
+                            <a 
+                                href="javascript:" 
+                                class="btn-play" 
+                                @click.stop="play" 
+                                v-if="!playing">
+                            </a>
+                            <a 
+                                href="javascript:" 
+                                class="btn-pause" 
+                                @click.stop="pause" 
+                                v-else>
+                            </a>
+                            <a href="javascript:" class="btn-stop" @click.stop="reload"></a>
+                            <a href="javascript:" class="btn-prev" @click.top="prev"></a>
+                            <a href="javascript:" class="btn-next" @click.top="next"></a>
+                            <div class="item-right" v-if="!isToggle">
+                                <i class="volume-btn muted " v-if="!volume" ></i>
+                                <i class="volume-btn" @click.stop="muted" v-else></i>
+                                <div class="slider-bar">
+                                    <el-slider v-model="volume" :max="10" @change="volumeChange"></el-slider>
+                                </div>
+                                <em>{{volume}}</em>
+                            </div>
+                            <div class="item-right" v-else>
+                                <i class="slider-btn" @click.stop="zoom">-</i>
+                                <div class="slider-bar">
+                                    <el-slider v-model="scale" :max="5" @change="scaleChange"></el-slider>
+                                </div>
+                                <i class="slider-btn" @click.stop="expand">+</i>
+                            </div>
+                        </div>
+                        <a href="javascript:" 
+                            class="btn-toggle-in" 
+                            @click.stop="isToggle = false"
+                            v-show="isToggle">
+                        </a>
+                    </div>
+
+
+                </div>
+                <div class="style-editor">
+                    <h2>字幕样式</h2>
+                    <h3>【xxero】</h3>
+                    <table>
+                        <tr>
+                            <td>字号</td>
+                            <td>
+                                <div v-for="(item,index) in fontSizeOptions"
+                                    :class="{'active' : item.checked}"
+                                    class="radio"
+                                    @click.stop="checkFontStyle(index,fontSizeOptions)">
+                                    {{item.option}}
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>字体颜色</td>
+                            <td>
+                                <ul class="color-picker first">
+                                    <li v-for="(item, key) in fontColorList" :key="key" :style="`background-color:${item.option}`"
+                                        :class="{ 'active' : item.checked}" @click.stop="checkFontColor(key,fontColorList)"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>描边颜色</td>
+                            <td>
+                                <ul class="color-picker last">
+                                    <li v-for="(item, key) in textShadowList" :key="key" :style="`background-color:${item.option}`"
+                                        :class="{ 'active' : item.checked}" @click.stop="checkFontColor(key,textShadowList)"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>底色透明度</td>
+                            <td>
+                                <div class="slider">
+                                    <el-slider v-model="opacity"></el-slider>
+                                </div>
+                                <div class="slider-value">
+                                    {{opacity}}%
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>字体所在位置</td>
+                            <td>
+                                <div v-for="(item,index) in fontPositionOptions"
+                                    :class="{'active' : item.checked}"
+                                    class="radio"
+                                    @click.stop="checkFontStyle(index,fontPositionOptions)">
+                                    {{item.option}}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="btn-wrap">
+                        <a href="javascript:" class="btn-save" @click.stop="download"><i></i>下载</a>
+                        <a href="javascript:" class="btn-pub" @click.stop="preview"><i></i>预览</a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-sub-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>开始时间</td>
+                            <td>结束时间</td>
+                            <td>字/秒</td>
+                            <td>
+                                文本
+                                <i class="btn-del" v-if="hasChecked" @click.stop="delSub"></i>
+                                <i class="disabled" v-else></i>
+                            </td>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item,key) in subList"
+                            :key="key"
+                            :class="{'on' : item.checked }">
+                            <td @click.stop="editSub(key)">{{key + 1}}</td>
+                            <td @click.stop="viewSingleSub(item.start)"><input type="text" v-model="item.start"></td>
+                            <td><input type="text" v-model="item.end"></td>
+                            <td><input type="text" v-model="item.velocity"></td>
+                            <td><input type="text"  v-model="item.text"></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+    <script src="//hm.baidu.com/hm.js?c5dd62b92534dfc5b0551fe00c6544cf"></script>
+</body>
+
+</html>
